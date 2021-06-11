@@ -1,6 +1,7 @@
 package com.example.filter;
 
 import com.example.common.CommonInfoHolder;
+import com.example.exception.CommonException;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,11 +26,11 @@ public class CommonInfoFilter implements Filter {
     private final static Logger log = LoggerFactory.getLogger(CommonInfoFilter.class);
 
     public void init(FilterConfig filterConfig) {
-        log.info("CommonInfoFilter init", new Object[0]);
+        log.info("CommonInfoFilter init");
     }
 
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-        log.info("*********   开始拦截", new Object[0]);
+        log.info("*********   开始拦截");
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         String requestURI = request.getRequestURI();
         // 静态资源请求直接放过
@@ -37,8 +38,8 @@ public class CommonInfoFilter implements Filter {
             Enumeration<String> headerNames = request.getHeaderNames();
             String userId = request.getHeader("userId");
             String token = request.getHeader("token");
-            log.info("请求头信息 userId：", userId);
-            log.info("请求头信息 token：", token);
+            log.info("请求头信息 userId：{}", userId);
+            log.info("请求头信息 token：{}", token);
             if (StringUtils.isNotEmpty(userId)) {
                 CommonInfoHolder.setUserId(Integer.valueOf(userId));
             }

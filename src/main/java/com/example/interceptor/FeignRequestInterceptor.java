@@ -34,7 +34,7 @@ public class FeignRequestInterceptor implements RequestInterceptor {
         Integer userId = CommonInfoHolder.getUserId();
         // 将公共信息保存到RequestTemplate中
         requestTemplate.header("userId", userId == null ? null : String.valueOf(userId));
-        requestTemplate.header("token", token == null ? null : String.valueOf(token));
+        requestTemplate.header("token", token);
 
         // 对参数的处理
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder
